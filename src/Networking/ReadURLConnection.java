@@ -3,12 +3,13 @@ package Networking;
 import java.awt.Cursor;
 import java.io.*;
 import java.net.URL;
+import java.net.URLConnection;
 import javax.swing.JOptionPane;
 
 
-public class ReadURL extends javax.swing.JFrame {
+public class ReadURLConnection extends javax.swing.JFrame {
 
-    public ReadURL() {
+    public ReadURLConnection() {
         initComponents();
         this.setSize(500, 600);
     }
@@ -30,7 +31,7 @@ public class ReadURL extends javax.swing.JFrame {
         txtContent = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Read URL");
+        setTitle("Read URL Connection");
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -97,7 +98,8 @@ public class ReadURL extends javax.swing.JFrame {
     private String readContent(String urlString) throws Exception{
         String content = "";
         URL url = new URL(urlString);
-        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+        URLConnection con = url.openConnection();
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         while ((inputLine = in.readLine()) != null)            
             content += inputLine + "\n";
@@ -131,20 +133,21 @@ public class ReadURL extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReadURL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReadURLConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReadURL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReadURLConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReadURL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReadURLConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReadURL.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReadURLConnection.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReadURL().setVisible(true);
+                new ReadURLConnection().setVisible(true);
             }
         });
     }
