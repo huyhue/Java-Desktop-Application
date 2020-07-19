@@ -1,5 +1,5 @@
 package RMI;
-
+//gom co class Math, Calculator, Strategy
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -8,7 +8,7 @@ import java.rmi.registry.Registry;
 //Client side
 public class Calculator {
     public static void main(String[] args) {
-        System.out.println("Started client");
+        System.out.println("Started client.");
         String host = "localhost";
         int post = 1985;
         try {
@@ -23,6 +23,6 @@ public class Calculator {
         } catch (NotBoundException ex) {
             ex.printStackTrace();
         } 
-        System.out.println("Client is closed");
+        System.out.println("Client is closed.");
     }
 }

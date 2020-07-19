@@ -1,5 +1,5 @@
 package RMI;
-
+//gom co class Math, Calculator, Strategy
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -10,7 +10,6 @@ import java.rmi.server.UnicastRemoteObject;
 public class Math extends UnicastRemoteObject implements Compute {
 
     public Math() throws RemoteException {
-
     }
 
     public int add(int a, int b) throws RemoteException {

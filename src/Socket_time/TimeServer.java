@@ -1,21 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Socket_time;
-
+//gom co class TimeClient + TimeServer
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
-
-/**
- *
- * @author ASUS
- */
 public class TimeServer {
     public static void main(String[] args) {
         ServerSocket serverSocket = null;
@@ -33,7 +23,7 @@ public class TimeServer {
                 socket = serverSocket.accept();
                 System.out.println("New clint connected");
                 
-                OutputStream output = socket.getOutputStream();
+                OutputStream output = socket.getOutputStream();  //output dua di
                 PrintWriter writer = new PrintWriter(output, true);
                 writer.println(new Date().toString());
             } catch (IOException e) {

@@ -1,5 +1,5 @@
 package Socket_time;
-
+// gom co class Server + Client
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,6 +11,7 @@ public class Client {
     public void connect() {
         try {
             Socket socket = new Socket("localhost", 1985);
+            
             //sending to server
             PrintStream ps = new PrintStream(socket.getOutputStream());
             ps.println("Study and Share");

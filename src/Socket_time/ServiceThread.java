@@ -1,4 +1,5 @@
 package Socket_time;
+//gom co class ServiceThread + ServerProgram + ClientProgram
 
 //Xây dựng ứng dụng sử dụng Socket + MutiThreading để Server có thể làm
 //việc đồng thời với nhiều Client.
@@ -7,7 +8,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ServiceThread extends Thread {
@@ -32,10 +32,11 @@ public class ServiceThread extends Thread {
             // Mở luồng vào ra trên Socket tại Server.
             BufferedReader is = new BufferedReader(new InputStreamReader(socketOfServer.getInputStream()));
             BufferedWriter os = new BufferedWriter(new OutputStreamWriter(socketOfServer.getOutputStream()));
+            
             while (true) {
                 // Đọc dữ liệu do client gửi tới.
                 String line = is.readLine();
-                System.out.println("" + clientNumber + ":" + line);
+                System.out.println("" + clientNumber + ": " + line);
                 // Ghi vào luồng đầu ra của Socket tại Server.
                 // (Nghĩa là gửi tới Client).
                 os.write("" + clientNumber + ">> " + line);
@@ -45,7 +46,6 @@ public class ServiceThread extends Thread {
                 os.flush();
                 // Nếu người dùng gửi tới QUIT (Muốn kết thúc trò chuyện).
                 if (line.equals("QUIT")) {
-
                     os.write("" + clientNumber + ">> OK");
                     os.newLine();
                     os.flush();
@@ -57,4 +57,5 @@ public class ServiceThread extends Thread {
             e.printStackTrace();
         }
     }
+    
 }

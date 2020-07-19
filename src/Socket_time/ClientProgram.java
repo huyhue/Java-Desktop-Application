@@ -1,5 +1,5 @@
 package Socket_time;
-
+//gom co class ServiceThread + ServerProgram + ClientProgram
 import java.io.*;
 import java.net.*;
 import java.util.Date;
@@ -16,8 +16,10 @@ public class ClientProgram {
             // Gửi yêu cầu kết nối tới Server đang lắng nghe
             // trên máy 'localhost' cổng 7777.
             socketOfClient = new Socket(serverHost, 7777);
+            
             // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
             os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
+            
             // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
             is = new BufferedReader(new InputStreamReader(socketOfClient.getInputStream()));
         } catch (UnknownHostException e) {
@@ -27,8 +29,10 @@ public class ClientProgram {
             System.err.println("Couldn't get I/O for the connection to " + serverHost);
             return;
         }
+        
         try {
-            // Ghi dữ liệu vào luồng đầu ra của Socket tại Client. os.write("HELO! now is " + new Date());
+            // Ghi dữ liệu vào luồng đầu ra của Socket tại Client. 
+            os.write("HELO! now is: " + new Date());
             os.newLine(); // kết thúc dòng
             os.flush(); // đẩy dữ liệu đi.
             os.write("I am Tom Cat");
@@ -41,7 +45,7 @@ public class ClientProgram {
             // Bằng cách đọc luồng đầu vào của Socket tại Client.
             String responseLine;
             while ((responseLine = is.readLine()) != null) {
-                System.out.println("Server: " + responseLine);
+                System.out.println("Server : " + responseLine);
                 if (responseLine.indexOf("OK") != -1) {
                     break;
                 }
@@ -56,4 +60,5 @@ public class ClientProgram {
             System.err.println("IOException: " + e);
         }
     }
+    
 }

@@ -1,6 +1,5 @@
 package Employee;
 public class Employee {
-
     private String empID;
     private String lastName;
     private String firstName;

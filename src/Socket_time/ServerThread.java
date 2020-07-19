@@ -1,5 +1,5 @@
 package Socket_time;
-
+//class gom co Message + ServerSerialization + ClientSerialization + ServerThread(chua hieu lam, multiple client)
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

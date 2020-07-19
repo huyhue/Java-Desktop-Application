@@ -1,5 +1,5 @@
 package Socket_time;
-
+//class gom co Message + ServerSerialization + ClientSerialization + ServerThread(chua hieu lam, multiple client)
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,6 +16,7 @@ public class ClientSerialization {
             oos.writeObject(m1);
             System.out.println("Sent to the server: " + m1.getTitle() + " " + m1.getBody());
             
+            //receive data from server
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             Message m2 = (Message) ois.readObject();
             if (m2 != null) {
