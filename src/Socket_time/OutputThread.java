@@ -6,13 +6,14 @@ import java.net.Socket;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+//Thread presents received messages automatically
 public class OutputThread extends Thread {
 
-    Socket socket;
-    JTextArea txt;
-    BufferedReader bf;
-    String sender;
-    String receiver;
+    Socket socket; //socket is joining to be communication
+    JTextArea txt; //text area contains communicated message
+    BufferedReader bf; //input buffer of the socket
+    String sender;  //sender, a site of the communication
+    String receiver;   //receiver, other site of the communication
 
     public OutputThread(Socket s, JTextArea txt, String sender, String receiver) {
         super();
@@ -28,6 +29,8 @@ public class OutputThread extends Thread {
         }
     }
 
+    //get data from the input stream periodically (1 times/ sec)
+    //The time when data comes can nt be known in advance
     @Override
     public void run() {
         while (true) {

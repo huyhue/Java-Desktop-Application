@@ -12,6 +12,7 @@ public class ManagerServerProgram {
             server = new EmployeeServer(filename);
             LocateRegistry.createRegistry(1098);
             Naming.rebind(serviceName, server);
+            
             System.out.println("Service " + serviceName + " is running.");
         } catch (Exception e) {
             System.out.println(e);

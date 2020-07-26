@@ -32,6 +32,9 @@ public class RmiClient extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RMI Client");
 
+        btnGet.setBackground(new java.awt.Color(255, 255, 0));
+        btnGet.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnGet.setForeground(new java.awt.Color(204, 0, 204));
         btnGet.setText("Get ");
         btnGet.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -44,16 +47,16 @@ public class RmiClient extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(btnGet, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addGap(167, 167, 167)
+                .addComponent(btnGet, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnGet, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnGet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(226, Short.MAX_VALUE))
         );
 
         pack();
@@ -62,6 +65,7 @@ public class RmiClient extends javax.swing.JFrame {
     private void btnGetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetActionPerformed
         try {
             weatherInter = (WeatherInterface)Naming.lookup("rmi://localhost:5001/WeatherServer");
+            
             weather = weatherInter.getWeather();
             JOptionPane.showMessageDialog(this, weather.getName() + " is " + weather.getTemperature());
         } catch (NotBoundException | MalformedURLException | RemoteException ex) {

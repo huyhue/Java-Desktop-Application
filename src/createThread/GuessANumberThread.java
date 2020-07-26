@@ -1,16 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package createThread;
-
 import java.util.Scanner;
-
-/**
- *
- * @author ASUS
- */
 public class GuessANumberThread extends Thread {
 
     private int guessNumber = 0;
@@ -26,9 +15,9 @@ public class GuessANumberThread extends Thread {
         do {
             randomNumber = (int) (Math.random() * 100 + 1);
             count++;
-            System.out.println(getName() + " đoán số " + randomNumber);
+            System.out.println(getName() + " đoán số: " + randomNumber);
 
-            try {
+            try {  //thoi gian de ngu
                 Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -40,7 +29,7 @@ public class GuessANumberThread extends Thread {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập một số nguyên để các thread đoán: ");
+        System.out.print("Nhập một số nguyên để các thread đoán: ");
         int number = scanner.nextInt();
 
         GuessANumberThread thread1 = new GuessANumberThread(number);
@@ -52,4 +41,5 @@ public class GuessANumberThread extends Thread {
         thread1.start();
         thread2.start();
     }
+    
 }

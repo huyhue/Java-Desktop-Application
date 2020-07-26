@@ -5,10 +5,11 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class ClientChatter extends javax.swing.JFrame {
 
-    Socket mngsocket = null;
+    Socket mngsocket = null;  //Socket of the manager program
     String mngIP = "";
     int mngPort = 0;
     String staffName = "";
@@ -16,9 +17,12 @@ public class ClientChatter extends javax.swing.JFrame {
     DataOutputStream os = null;   //output buffer
     //thread allows presenting reveived data automatically
     OutputThread t = null;
+    private JPanel panelChat;
 
     public ClientChatter() {
         initComponents();
+        panelChat = new ChatPanel(mngsocket, staffName, "Manager");
+                pChat.add(panelChat);
     }
 
     /**
@@ -38,6 +42,7 @@ public class ClientChatter extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtServerPort = new javax.swing.JTextField();
         btnConnect = new javax.swing.JButton();
+        pChat = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Staff Chatter");
@@ -47,14 +52,20 @@ public class ClientChatter extends javax.swing.JFrame {
 
         jLabel1.setText("Staff:");
         jPanel1.add(jLabel1);
+
+        txtStaff.setText("Hoa");
         jPanel1.add(txtStaff);
 
         jLabel2.setText("Mng IP:");
         jPanel1.add(jLabel2);
+
+        txtServerIP.setText("127.0.0.1");
         jPanel1.add(txtServerIP);
 
         jLabel3.setText("Port:");
         jPanel1.add(jLabel3);
+
+        txtServerPort.setText("12340");
         jPanel1.add(txtServerPort);
 
         btnConnect.setText("Connect");
@@ -65,17 +76,34 @@ public class ClientChatter extends javax.swing.JFrame {
         });
         jPanel1.add(btnConnect);
 
+        javax.swing.GroupLayout pChatLayout = new javax.swing.GroupLayout(pChat);
+        pChat.setLayout(pChatLayout);
+        pChatLayout.setHorizontalGroup(
+            pChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 613, Short.MAX_VALUE)
+        );
+        pChatLayout.setVerticalGroup(
+            pChatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 274, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(pChat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 254, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGap(0, 48, Short.MAX_VALUE)
+                    .addComponent(pChat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
@@ -89,10 +117,11 @@ public class ClientChatter extends javax.swing.JFrame {
         try {
             mngsocket = new Socket(mngIP, mngPort);  //connect to server
             if (mngsocket != null) { //if connect successful
+                
                 ChatPanel p = new ChatPanel(mngsocket, staffName, "Manager");
                 this.getContentPane().add(p);
                 p.getTxtMessages().append("Manager is running\n");
-                p.getTxtMessages().updateUI();
+                p.updateUI();
                 
                 //get the socket input stream and output stream
                 bf = new BufferedReader(new InputStreamReader(mngsocket.getInputStream()));
@@ -150,6 +179,7 @@ public class ClientChatter extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pChat;
     private javax.swing.JTextField txtServerIP;
     private javax.swing.JTextField txtServerPort;
     private javax.swing.JTextField txtStaff;

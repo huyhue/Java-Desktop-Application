@@ -36,6 +36,8 @@ public class RmiServer extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("RMI Server");
 
+        btnStart.setBackground(new java.awt.Color(0, 204, 0));
+        btnStart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,6 +45,8 @@ public class RmiServer extends javax.swing.JFrame {
             }
         });
 
+        btnUpdate.setBackground(new java.awt.Color(0, 204, 204));
+        btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +97,7 @@ public class RmiServer extends javax.swing.JFrame {
                 .addGap(109, 109, 109)
                 .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUpdate)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -121,8 +125,10 @@ public class RmiServer extends javax.swing.JFrame {
         weather.setTemperature(50.5F);
         try {
             weatherImpl = new WeatherImpl(weather);
+            
             LocateRegistry.createRegistry(5001);
             Naming.rebind("rmi://localhost:5001/WeatherServer",weatherImpl);
+            
             JOptionPane.showMessageDialog(this, "Server started");
             this.btnStart.setEnabled(false);
             this.btnUpdate.setEnabled(true);

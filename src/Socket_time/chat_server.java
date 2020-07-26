@@ -127,7 +127,7 @@ public class chat_server extends javax.swing.JFrame {
 
             while (!msgin.equals("exit")) {
                 msgin = din.readUTF();
-                msg_area.setText(msg_area.getText().trim() + "\n" + msgin);  //display message...
+                msg_area.setText(msg_area.getText().trim() + "\n Client: " + msgin);  //display message...
             }
         } catch (Exception e) {
         }

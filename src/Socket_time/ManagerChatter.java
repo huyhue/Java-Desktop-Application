@@ -1,5 +1,5 @@
 package Socket_time;
-//gom co class ChatPanel + ClientChatter + ManagerChatter + OutputThread
+//gom co class ChatPanel1 + ClientChatter + ManagerChatter + OutputThread
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -10,11 +10,13 @@ public class ManagerChatter extends javax.swing.JFrame implements Runnable {
     ServerSocket srvSocket = null;
     BufferedReader br = null;
     Thread t;  //thread for exploring connection from staffs
-
+    int serverPort = 0;
+    //creates new form ManagerGUI
     public ManagerChatter() {
         initComponents();
         this.setSize(600, 300);
-        int serverPort = Integer.parseInt(txtServerPort.getText());
+//        int serverPort = Integer.parseInt(txtServerPort.getText());
+        serverPort = Integer.parseInt(txtServerPort.getText());
         try {
             srvSocket = new ServerSocket(serverPort);
             this.lbMessage.setText("Mng. Server is running at the port ");
@@ -37,7 +39,7 @@ public class ManagerChatter extends javax.swing.JFrame implements Runnable {
                     String staffName = S.substring(pos+1);  //get name
                     ChatPanel p = new ChatPanel(aStaffSocket, "Manager", staffName);
                     jTabbedPane1.add(staffName, p);
-                    p.getTxtMessages().updateUI();
+                    p.updateUI();
                 }
                 Thread.sleep(1000);
             } catch (Exception e) {
@@ -69,6 +71,13 @@ public class ManagerChatter extends javax.swing.JFrame implements Runnable {
 
         lbMessage.setText("Manager Port:");
         jPanel1.add(lbMessage);
+
+        txtServerPort.setText("12340");
+        txtServerPort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                none(evt);
+            }
+        });
         jPanel1.add(txtServerPort);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -118,6 +127,10 @@ public class ManagerChatter extends javax.swing.JFrame implements Runnable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void none(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_none
+        // TODO add your handling code here:
+    }//GEN-LAST:event_none
 
     /**
      * @param args the command line arguments

@@ -1,2 +1,0 @@
-createThread.Lottery
-createThread.LotteryThread

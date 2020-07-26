@@ -1,12 +1,13 @@
 package Socket_time;
 //gom co class ChatPanel + ClientChatter + ManagerChatter + OutputThread
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import javax.swing.JTextArea;
 
-public class ChatPanel extends javax.swing.JFrame {
+public class ChatPanel extends javax.swing.JPanel {
 
     Socket socket = null;
     BufferedReader bf = null;
@@ -14,13 +15,15 @@ public class ChatPanel extends javax.swing.JFrame {
     OutputThread t = null;
     String sender;
     String receiver;
-
+    
+    //creates new form ChatWithStaff
     public ChatPanel(Socket s, String sender, String receiver) {
         initComponents();
         this.socket = s;
         this.sender = sender;
         this.receiver = receiver;
         try {
+            //input buffer and output buffer
             bf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             os = new DataOutputStream(socket.getOutputStream());
             t = new OutputThread(s, txtMessage, sender, receiver);
@@ -28,10 +31,6 @@ public class ChatPanel extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-
-    private ChatPanel() {
-    }
-
     public JTextArea getTxtMessages() {
         return this.txtMessages;
     }
@@ -45,26 +44,20 @@ public class ChatPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtMessages = new javax.swing.JTextArea();
         panelMessage = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
         btnSend = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtMessages = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtMessages.setColumns(20);
-        txtMessages.setRows(5);
-        jScrollPane1.setViewportView(txtMessages);
-
-        panelMessage.setBorder(javax.swing.BorderFactory.createTitledBorder("Message"));
+        panelMessage.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Message", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 2, 12), new java.awt.Color(0, 0, 255))); // NOI18N
 
         txtMessage.setColumns(20);
         txtMessage.setRows(5);
         jScrollPane2.setViewportView(txtMessage);
 
-        btnSend.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnSend.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnSend.setText("Send");
         btnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,32 +70,34 @@ public class ChatPanel extends javax.swing.JFrame {
         panelMessageLayout.setHorizontalGroup(
             panelMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelMessageLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))
+                .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
         );
         panelMessageLayout.setVerticalGroup(
             panelMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
             .addComponent(btnSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        txtMessages.setColumns(20);
+        txtMessages.setRows(5);
+        jScrollPane1.setViewportView(txtMessages);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
             .addComponent(panelMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(panelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
@@ -118,40 +113,6 @@ public class ChatPanel extends javax.swing.JFrame {
         } catch (Exception e) {}
     }//GEN-LAST:event_btnSendActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChatPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ChatPanel().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSend;

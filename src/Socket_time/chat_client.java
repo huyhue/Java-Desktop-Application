@@ -73,7 +73,7 @@ public class chat_client extends javax.swing.JFrame {
     private void msg_sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_sendActionPerformed
         try {
             String msgout = "";
-            msgout = msg_text.getText().trim();
+            msgout = msg_text.getText().trim(); //lay tin nhan
             dout.writeUTF(msgout);
         } catch (Exception e) {
         }
@@ -121,7 +121,7 @@ public class chat_client extends javax.swing.JFrame {
             String msgin = "";
             while (!msgin.equals("exit")) {
                 msgin = din.readUTF();
-                msg_area.setText(msg_area.getText().trim() + "\n Server:\t" + msgin);
+                msg_area.setText(msg_area.getText().trim() + "\n Server: " + msgin);
             }
         } catch (Exception e) {
         }
